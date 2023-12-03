@@ -1,4 +1,4 @@
-const str= `.........798...145.........629....579.....455.....................130.............243.................154........167........................
+export const str= `.........798...145.........629....579.....455.....................130.............243.................154........167........................
 ............*.....*...........*...&...179.*........737...194.........*854........./...........52..560*............................699...&...
 ........459..489.817........880.........*..996........*....*........................................................................*.36....
 ...........@.........................813............234.552..307....184............370..................736.....960..............631........
@@ -138,60 +138,3 @@ const str= `.........798...145.........629....579.....455.....................13
 863...112................178...+...........*...........5./............98......584..222..........862...235.....448...*.....737.....*.....516.
 ....#.......425..............923.84*......947......999*..............*....280*...........732...&.....*.............14.............683.......
 .....353............................914........105.................829...........112...............75.......................................`
-
-
-
-const rows = str.split("\n");
-const arrIp = rows.map(row=>row.split(""));
-const rowLen = arrIp.length;
-const colLen = arrIp[0].length;
-
-const isDigitOrPeriod = (c) => /[0-9.]/.test(c);
-
-const isDigit = (c) => /[0-9]/.test(c);
-
-const dfs = (idx) => {
-    const helperIdxList = [[0,1], [0,-1], [-1,0], [1,0], [-1,-1], [-1,1], [1,-1], [1,1]];
-    for(let i=0; i<helperIdxList.length; i++){
-        const rowVal = idx[0]+helperIdxList[i][0];
-        const colVal = idx[1] + helperIdxList[i][1];
-        if(rowVal<0 || rowVal===arrIp.length || colVal<0 || colVal===arrIp[0].length || isDigitOrPeriod(arrIp[rowVal][colVal])){
-            continue;
-        }
-        return true;
-    }
-    return false;
-}
-
-const solution = () => {
-    let partsSum = 0;
-    let encounteredSpecial = false;
-    for(let i = 0; i<rowLen; i++){
-        let currSum = 0;
-        for(let j = 0; j<colLen; j++){
-            if(!isDigit(arrIp[i][j])){
-                if(encounteredSpecial){
-                partsSum+=currSum;
-                currSum = 0;
-                encounteredSpecial = false;
-            }
-                currSum = 0;
-                continue;
-            }
-            else{
-                currSum = currSum*10+parseInt(arrIp[i][j]);
-                encounteredSpecial = encounteredSpecial || dfs([i,j]);
-            }
-
-        }
-        if(encounteredSpecial){
-        partsSum+=currSum;
-    }
-        currSum = 0;
-        encounteredSpecial=false;
-    }
-
-    return partsSum;
-}
-
-console.log(solution());

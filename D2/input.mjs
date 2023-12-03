@@ -1,4 +1,4 @@
-const str = `Game 1: 2 green, 12 blue; 6 red, 6 blue; 8 blue, 5 green, 5 red; 5 green, 13 blue; 3 green, 7 red, 10 blue; 13 blue, 8 red
+export const str = `Game 1: 2 green, 12 blue; 6 red, 6 blue; 8 blue, 5 green, 5 red; 5 green, 13 blue; 3 green, 7 red, 10 blue; 13 blue, 8 red
 Game 2: 1 green, 7 red; 1 green, 9 red, 3 blue; 4 blue, 5 red
 Game 3: 2 red, 2 blue, 6 green; 1 blue, 2 red, 2 green; 3 blue, 3 green
 Game 4: 8 green, 16 red, 7 blue; 1 red, 7 blue, 12 green; 8 green, 14 red, 1 blue; 6 blue, 9 green, 12 red; 9 red, 2 green; 8 red, 7 blue, 17 green
@@ -98,33 +98,3 @@ Game 97: 4 red, 3 green; 1 blue, 2 green; 4 green, 4 red; 1 red, 1 blue; 1 green
 Game 98: 7 green, 4 blue, 1 red; 2 red, 5 blue; 4 blue, 3 red, 7 green
 Game 99: 7 blue, 13 green; 3 green, 5 red, 12 blue; 2 blue, 14 green, 8 red; 4 red, 6 blue, 2 green; 5 red, 9 green, 13 blue; 8 red, 8 blue, 5 green
 Game 100: 8 green, 7 blue, 1 red; 10 blue, 2 green, 5 red; 12 blue, 1 green, 1 red; 9 green, 9 blue, 2 red; 1 blue, 5 red, 3 green`;
-
-// const str=`Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
-// Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
-// Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
-// Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
-// Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`
-
-const gamesArr = str.split("\n");   
-
-let powerSum = 0;
-
-for(let i = 0; i< gamesArr.length; i++){
-    const gameMap = new Map([["red", 0], ["green", 0], ["blue", 0]])
-
-    gamesArr[i] = gamesArr[i].slice(5);
-    gamesArr[i] =  gamesArr[i].split(": "); //[[18],[1 G, 2 B; 2 G, 3 R, 4 B; 2 G, 4 B; 1 R, 4 G; ...]]
-    gamesArr[i] = gamesArr[i][1].split("; "); //[[1 G, 2 R], [2 G, 3 R, 4 B]] -> Correct till here
-    for(let j = 0; j<gamesArr[i].length; j++){
-        gamesArr[i][j] = gamesArr[i][j].split(", "); //[[[1 G],[2 R]], []]
-        for(let k = 0; k < gamesArr[i][j].length; k++){
-            const keyValToCheck = gamesArr[i][j][k].split(" ");
-            if(keyValToCheck[0]>gameMap.get(keyValToCheck[1])){
-                gameMap.set(keyValToCheck[1],parseInt(keyValToCheck[0]));
-            }
-        }
-    }
-    powerSum+=gameMap.get("red")*gameMap.get("green")*gameMap.get("blue")
-}
-
-console.log(powerSum);
