@@ -24,7 +24,7 @@ const solution = () => {
             }
         }
         for(let j = i+1; j <= i+currTotal; j++){
-            cardMap.set(j, cardMap.get(j)+1*cardMap.get(i));
+            cardMap.set(j, cardMap.get(j)+cardMap.get(i));
         }
     }
     for(let [key, value] of cardMap){
