@@ -15,9 +15,10 @@ const differenceCreator = (arr) => {
 }
 
 let total = 0;
-let firstEleArray = [];
-let currHistDiff = 0;
+
 for (let i = 0; i < arrIp.length; i++) {
+    let firstEleArray = [];
+    let currHistDiff = 0;
     let arrToCheck = arrIp[i];
 
     while (!checkAllZeros(arrToCheck)) {
@@ -30,8 +31,6 @@ for (let i = 0; i < arrIp.length; i++) {
     }
 
     total += currHistDiff;
-    currHistDiff = 0;
-    firstEleArray = [];
 }
 
 console.log(total)
