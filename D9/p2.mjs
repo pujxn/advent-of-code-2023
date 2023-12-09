@@ -33,4 +33,5 @@ for (let i = 0; i < arrIp.length; i++) {
     total += currHistDiff;
 }
 
+
 console.log(total)
